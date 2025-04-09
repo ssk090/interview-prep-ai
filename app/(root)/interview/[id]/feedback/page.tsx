@@ -19,8 +19,11 @@ const Feedback = async ({ params }: RouteParams) => {
 
     const feedback = await getFeedbackByInterviewId({
         interviewId: id,
-        userId: user?.id!,
+        userId: user?.id ?? "",
     });
+    if (!feedback) {
+        return <p>No feedback available for this interview yet.</p>;
+    }
 
     return (
         <section className="section-feedback">
@@ -90,6 +93,21 @@ const Feedback = async ({ params }: RouteParams) => {
                         <li key={index}>{area}</li>
                     ))}
                 </ul>
+            </div>
+
+            <div className="flex flex-col gap-3">
+                <div className="flex flex-row items-center gap-2">
+                    <h3>Final Verdict:</h3>
+                    <span
+                        className={`px-3 py-1 rounded-full text-white ${feedback?.totalScore !== undefined && feedback.totalScore >= 70
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                            }`}
+                    >
+                        {feedback?.totalScore !== undefined && feedback.totalScore >= 70 ? "Recommended" : "Not Recommended"}
+                    </span>
+                </div>
+                <p>{feedback?.finalAssessment}</p>
             </div>
 
             <div className="buttons">
