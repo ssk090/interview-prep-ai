@@ -2,7 +2,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import Agent from "@/components/Agent";
-import { getRandomInterviewCover } from "@/lib/utils";
+import { getCompanyLogos } from "@/lib/utils";
 
 import {
     getFeedbackByInterviewId,
@@ -24,14 +24,16 @@ const InterviewDetails = async ({ params }: RouteParams) => {
         userId: user?.id!,
     });
 
+    const companyLogo = await getCompanyLogos(interview.company);
+
     return (
         <div className="interviewid-layout">
             <div className="flex flex-row gap-4 justify-between my-6">
                 <div className="flex flex-row gap-4 items-center max-sm:flex-col">
                     <div className="flex flex-row gap-4 items-center">
                         <Image
-                            src={getRandomInterviewCover()}
-                            alt="cover-image"
+                            src={companyLogo}
+                            alt="company-logo"
                             width={40}
                             height={40}
                             className="rounded-full object-cover size-[40px]"
