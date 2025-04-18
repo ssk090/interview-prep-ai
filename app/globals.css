@@ -4,14 +4,39 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+
 @theme {
   --color-success-100: #49de50;
   --color-success-200: #42c748;
   --color-destructive-100: #f75353;
   --color-destructive-200: #c44141;
 
-  --color-primary-100: #dddfff;
-  --color-primary-200: #cac5fe;
+  --color-primary-100: #0069fd;
+  --color-primary-200: #2881FF;
 
   --color-light-100: #d6e0ff;
   --color-light-400: #6870a6;
@@ -205,7 +230,7 @@
     }
 
     .btn {
-      @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+      @apply !w-1/2 !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer flex justify-center;
     }
   }
 
@@ -262,7 +287,7 @@
   }
 
   .root-layout {
-    @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+    @apply flex mx-auto max-w-screen px-3 flex-col gap-12 my-3 max-sm:my-8;
   }
 
   .card-cta {
@@ -282,7 +307,7 @@
   }
 
   .tech-tooltip {
-    @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
+    @apply absolute left-full ml-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md z-10;
   }
 
   .card-interview {
@@ -295,7 +320,7 @@
 }
 
 @utility dark-gradient {
-  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
+  @apply bg-gradient-to-b from-[#000000] to-[#030e3b];
 }
 
 @utility border-gradient {

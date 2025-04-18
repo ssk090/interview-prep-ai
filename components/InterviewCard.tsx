@@ -1,13 +1,13 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { getRandomInterviewCover } from '@/lib/utils';
+import { getCompanyLogos } from '@/lib/utils';
 import DisplayTechIcons from "./DisplayTechIcons";
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { getFeedbackByInterviewId } from '@/lib/actions/general.action';
 
-const InterviewCard = async ({ interviewId, userId, role, type, techstack, createdAt }: InterviewCardProps) => {
+const InterviewCard = async ({ interviewId, userId, role, type, techstack, createdAt, company }: InterviewCardProps) => {
     const feedback = userId && interviewId ? await getFeedbackByInterviewId({ interviewId, userId }) : null;
     const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format("MMM D, YYYY");
@@ -19,7 +19,9 @@ const InterviewCard = async ({ interviewId, userId, role, type, techstack, creat
                     <div className='absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-600'>
                         <p className="badge-text">{normalizedType}</p>
                     </div>
-                    <Image src={getRandomInterviewCover()} alt="cover-image" height={90} width={90} className='rounded-full object-fit size-[90px]' />
+                    {company && (
+                        <Image src={await getCompanyLogos(company)} alt="cover-image" height={90} width={90} className='rounded-full object-fit size-[90px]' />
+                    )}
 
                     <h3 className="mt-5 capitalize">{role} Interview</h3>
 

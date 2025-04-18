@@ -7,6 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const techIconBaseURL = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+const clearbitLogoBaseURL = "https://logo.clearbit.com";
 
 const normalizeTechName = (tech: string) => {
   const key = tech.toLowerCase().replace(/\.js$/, "").replace(/\s+/g, "");
@@ -39,6 +40,14 @@ export const getTechLogos = async (techArray: string[]) => {
   );
 
   return results;
+};
+
+export const getCompanyLogos = async (company: string) => {
+  const normalizedDomain = company.toLowerCase().replace(/\s+/g, "") + ".com";
+  const logoURL = `${clearbitLogoBaseURL}/${normalizedDomain}`;
+
+  const exists = await checkIconExists(logoURL);
+  return exists ? logoURL : "/default-company.svg";
 };
 
 export const getRandomInterviewCover = () => {

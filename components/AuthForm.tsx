@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/firebase/client"
 import { signIn, signUp } from "@/lib/actions/auth.action"
+import { useState } from "react"
 
 const authFormSchema = (type: FormType) => {
     return z.object({
@@ -26,6 +27,7 @@ const authFormSchema = (type: FormType) => {
 const AuthForm = ({ type }: { type: FormType }) => {
     const router = useRouter();
     const formSchema = authFormSchema(type)
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -37,6 +39,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsLoading(true);
         try {
             if (type === 'sign-up') {
                 const { name, email, password } = values;
@@ -79,6 +82,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
         } catch (error) {
             console.log(error)
             toast.error(`There was an error: ${error}`)
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -88,7 +93,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             <div className="flex flex-col gap-6 card py-14 px-10">
                 <div className="flex flex-row gap-2 justify-center">
                     <Image src="/logo.svg" alt="logo" height={32} width={38} />
-                    <h2 className="text-primary-100">Prep AI</h2>
+                    <h2 className="text-primary-100">Interview AI</h2>
                 </div>
                 <h3 className="flex justify-center">Practice job interview with AI</h3>
 
@@ -99,9 +104,20 @@ const AuthForm = ({ type }: { type: FormType }) => {
                             <FormField name="name" control={form.control} label="Name" placeholder="Your name" />
                         )}
                         <FormField name="email" control={form.control} label="Email" placeholder="Enter your email" type="email" />
-                        <FormField name="password" control={form.control} label="Passowrd" placeholder="Enter your password" type="password" />
-
-                        <Button className="btn" type="submit">{isSignIn ? 'Sign In' : 'Create an Account'}</Button>
+                        <FormField name="password" control={form.control} label="Password" placeholder="Enter your password" type="password" />
+                        <div className="flex flex-col gap-4 mt-4 justify-center items-center">
+                            <Button
+                                className="btn"
+                                type="submit"
+                                disabled={isLoading || !form.watch('email') || !form.watch('password') || form.formState.isSubmitting}
+                            >
+                                {isLoading
+                                    ? "Loading..."
+                                    : isSignIn
+                                        ? "Sign In"
+                                        : "Create an Account"}
+                            </Button>
+                        </div>
                     </form>
                 </Form>
 

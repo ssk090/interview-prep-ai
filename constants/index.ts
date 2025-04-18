@@ -1,4 +1,5 @@
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import { LayoutDashboard, SettingsIcon, User } from "lucide-react";
 import { z } from "zod";
 
 export const mappings = {
@@ -228,3 +229,21 @@ export const dummyInterviews: Interview[] = [
         createdAt: "2024-03-14T15:30:00Z",
     },
 ];
+
+export const SidebarItems = [
+    {
+        title: "Dashboard",
+        icon: LayoutDashboard,
+        link: "/"
+    },
+    {
+        title: "Settings",
+        icon: SettingsIcon,
+        link: "/settings"
+    },
+    {
+        title: "Profile",
+        icon: User,
+        link: "/profile"
+    }
+]

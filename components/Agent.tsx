@@ -147,10 +147,10 @@ const Agent = ({
 
     return (
         <>
-            <div className="call-view">
+            <div className="call-view flex flex-col sm:flex-row gap-6 sm:gap-10 items-center justify-between w-full mx-auto px-2 sm:px-4">
                 {/* AI Interviewer Card */}
-                <div className="card-interviewer">
-                    <div className="avatar">
+                <div className="card-interviewer flex flex-col items-center gap-2 p-5 sm:p-7 h-[320px] sm:h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1">
+                    <div className="avatar z-10 flex items-center justify-center blue-gradient rounded-full size-[100px] sm:size-[120px] relative">
                         <Image
                             src="/ai-avatar.png"
                             alt="profile-image"
@@ -158,28 +158,31 @@ const Agent = ({
                             height={54}
                             className="object-cover"
                         />
-                        {isSpeaking && <span className="animate-speak" />}
+                        {isSpeaking && <span className="animate-speak absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-200 opacity-75" />}
                     </div>
-                    <h3>AI Interviewer</h3>
+                    <h3 className="text-center text-primary-100 mt-3 sm:mt-5">AI Interviewer</h3>
                 </div>
 
                 {/* User Profile Card */}
-                <div className="card-border">
-                    <div className="card-content">
-                        <Image
-                            src="/user-avatar.png"
-                            alt="profile-image"
-                            width={539}
-                            height={539}
-                            className="rounded-full object-cover size-[120px]"
-                        />
-                        <h3>{userName}</h3>
+                <div className="card-border border-gradient p-0.5 rounded-2xl flex-1 h-[320px] sm:h-[400px]">
+                    <div className="card-content flex flex-col gap-2 justify-center items-center p-5 sm:p-7 dark-gradient rounded-2xl min-h-full">
+                        <div className="avatar z-10 flex items-center justify-center blue-gradient rounded-full size-[100px] sm:size-[120px] relative">
+                            <Image
+                                src="/user-avatar.png"
+                                alt="profile-image"
+                                width={539}
+                                height={539}
+                                className="rounded-full object-cover size-[100px] sm:size-[120px]"
+                            />
+                            {(!isSpeaking && callStatus === CallStatus.ACTIVE) && <span className="animate-speak absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-200 opacity-75" />}
+                        </div>
+                        <h3 className="text-center text-primary-100 mt-3 sm:mt-5">{userName}</h3>
                     </div>
                 </div>
             </div>
 
             {messages.length > 0 && (
-                <div className="transcript-border">
+                <div className="transcript-border mt-4 sm:mt-8">
                     <div className="transcript">
                         <p
                             key={lastMessage}
@@ -194,7 +197,7 @@ const Agent = ({
                 </div>
             )}
 
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center mt-4 sm:mt-8">
                 {callStatus !== "ACTIVE" ? (
                     <button className="relative btn-call" onClick={() => handleCall()}>
                         <span
