@@ -2,7 +2,6 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -45,7 +44,6 @@ export function AppSidebar() {
           </SidebarContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
     </Sidebar>
   )
 }
