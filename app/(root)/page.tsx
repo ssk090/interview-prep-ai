@@ -19,9 +19,6 @@ async function Home() {
     const hasPastInterviews = (userInterviews?.length || 0) > 0;
     const hasUpcomingInterviews = (allInterview?.length || 0) > 0;
 
-    console.log("userInterviews", userInterviews);
-    console.log("allInterview", allInterview);
-
     return (
         <>
             <Welcome user={user?.name || ""} />
