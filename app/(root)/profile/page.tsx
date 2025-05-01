@@ -2,7 +2,6 @@ import { getCurrentUser } from "@/lib/actions/auth.action";
 
 export default async function SettingsPage() {
     const user = await getCurrentUser();
-    console.log("user", user);
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Profile</h1>
