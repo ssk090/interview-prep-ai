@@ -20,7 +20,8 @@ export function AppSidebar() {
       <SidebarHeader className="bg-black flex items-center justify-between px-4 py-4">
         <nav>
           <Link href="/" className='flex items-center gap-2'>
-            <Image src="/logo.svg" alt="logo" height={32} width={38} />
+            {/* <Image src="/logo.svg" alt="logo" height={32} width={38} /> */}
+            <h1 className='text-primary-100 font-bold text-2xl'>🤖</h1>
             <h2 className='text-primary-100'>Interview AI</h2>
           </Link>
         </nav>

@@ -34,11 +34,11 @@ async function Home() {
                 </div>
 
                 <Image
-                    src="/robot.png"
+                    src="/robot-new.png"
                     alt="robo-dude"
                     width={400}
                     height={400}
-                    className="max-sm:hidden"
+                    className="max-sm:hidden rounded-2xl [mask-image:linear-gradient(to_top,transparent,black_80%)]"
                 />
             </section>
 
