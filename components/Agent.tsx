@@ -197,7 +197,7 @@ const Agent = ({
                 </div>
             )}
 
-            <div className="w-full flex justify-center mt-4 sm:mt-8">
+            <div className="w-full flex justify-center mt-4 sm:mt-8 gap-4">
                 {callStatus !== "ACTIVE" ? (
                     <button className="relative btn-call" onClick={() => handleCall()}>
                         <span
@@ -208,17 +208,22 @@ const Agent = ({
                         />
 
                         <span className="relative">
-                            {callStatus === "INACTIVE" || callStatus === "FINISHED"
+                            {callStatus === CallStatus.INACTIVE || callStatus === CallStatus.FINISHED
                                 ? "Call"
                                 : ". . ."}
                         </span>
                     </button>
                 ) : (
-                    <button className="btn-disconnect" onClick={() => handleDisconnect()}>
+                    <button className="btn-disconnect btn-call" onClick={() => handleDisconnect()}>
                         End
                     </button>
                 )}
             </div>
+            {callStatus === CallStatus.ACTIVE && (
+                <div className="flex justify-center mt-2">
+                    <h1 className="text-white/50">interview in progress...</h1>
+                </div>
+            )}
         </>
     );
 };
